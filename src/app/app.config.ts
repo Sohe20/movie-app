@@ -1,14 +1,17 @@
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { provideHttpClient, withFetch } from '@angular/common/http';
+import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { routes } from './app.routes';
-import { 
-  SocialAuthServiceConfig,
-  GoogleLoginProvider 
-} from '@abacritt/angularx-social-login';
+import { environment } from '../environments/environment.development';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes),
+    provideZoneChangeDetection({ eventCoalescing: true }), 
+    provideRouter(routes), 
+    provideHttpClient(withFetch()),
+    importProvidersFrom(SocialLoginModule),
+
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {
@@ -16,15 +19,14 @@ export const appConfig: ApplicationConfig = {
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider(
-              'YOUR_CLIENT_ID.apps.googleusercontent.com', // جایگزین کن
-              {
-                oneTapEnabled: false,
-                scopes: 'email profile openid'
-              }
-            )
+            provider: new GoogleLoginProvider(environment.GOOGLE_AUTH.CLIENT_ID, {
+              scopes: ['openid', 'profile', 'email']
+            })
           }
-        ]
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
       } as SocialAuthServiceConfig,
     }
   ]
