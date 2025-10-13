@@ -5,5 +5,6 @@ export const environment = {
     },
     GOOGLE_AUTH :{
         CLIENT_ID:'222767971577-pop8hanp08gblap0f42aei69d2i0729q.apps.googleusercontent.com'
-    }
+    },
+    AUTH_TOKEN_KEY:"user-data"
 };

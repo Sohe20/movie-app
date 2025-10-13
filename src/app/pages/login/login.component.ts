@@ -1,26 +1,54 @@
-import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { SocialAuthService, SocialUser , GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
+import { Component, inject } from '@angular/core';
+import { environment } from '../../../environments/environment.development';
+import { GoogleLoginProvider, SocialAuthService, SocialUser, GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
+import{ LocalStorageService } from '../../core/services/local-storage'
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-login',
+  imports: [GoogleSigninButtonModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
-  standalone: true,
-  imports: [CommonModule , GoogleSigninButtonModule],
+  styleUrl: './login.component.scss'
 })
-export default class LoginComponent implements OnInit {
+export default class LoginComponent {
   user: SocialUser | null = null;
 
-  constructor(private authService: SocialAuthService) {}
 
-  ngOnInit(): void {
-    this.authService.authState.subscribe((user) => {
-      this.user = user;
-      console.log('User:', user);
-      if (user) {
-        alert('Login successful! Welcome ' + user.name);
+  authService = inject(SocialAuthService);
+  localstrService = inject(LocalStorageService);
+  router = inject(Router);
+  
+
+
+  ngOnInit() {
+
+    this.authService.initState.subscribe(() => {
+      const googleLoginOptions = {
+        prompt: 'select_account',
+        ux_mode: 'popup',
+        disableOAth2: false,
+        scope: 'email profile'
       }
-    });
+
+
+      this.authService.authState.subscribe((user) => {
+        this.user = user;
+        if (user) {
+          this.localstrService.setItem(environment.AUTH_TOKEN_KEY, { ...user });
+          this.router.navigate(['browse'])
+        }
+      });
+    })
+  }
+
+  async signInWithGoogle() {
+    const response = await this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    console.log(response);
+  }
+
+  signOut(): void {
+    this.authService.signOut();
   }
 }
