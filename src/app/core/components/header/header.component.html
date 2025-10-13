@@ -1,1 +1,22 @@
-<p>header works!</p>
+<header class="fixed top-0 w-full h-[68px] bg-gray-900 px-10 z-10 flex justify-between items-center">
+  <!-- Left Side -->
+  <div class="flex items-center">
+    <img src="/public/images/netflix-logo.png" alt="netflix-logo" class="w-[110px]">
+    <nav class="ml-8">
+      <ul class="flex space-x-6">
+        @for (item of navList; track $index) {
+          <li class="text-neutral-200 text-sm hover:text-gray-400 transition-colors duration-300 cursor-pointer">{{ item }}</li>
+        }
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Right Side -->
+  <div class="flex items-center">
+    <span class="text-neutral-200 mr-4">Welcome {{username}}</span>
+    <img [src]="userImg" alt="Profile" class="w-[42px] h-[42px] rounded-full mr-4">
+    <button (click)="signOut()" class="text-neutral-200 text-sm hover:text-gray-400 transition-colors duration-300">
+      Signout
+    </button>
+  </div>
+</header>

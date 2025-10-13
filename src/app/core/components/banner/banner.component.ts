@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-banner',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './banner.component.html',
   styleUrl: './banner.component.scss'
 })

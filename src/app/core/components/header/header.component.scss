@@ -1,0 +1,19 @@
+// Responsive styles for the header
+header {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  @media (max-width: 768px) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    
+    nav {
+      display: none;
+    }
+  }
+}
+
+// Profile image styling
+img[alt="Profile"] {
+  object-fit: cover;
+  border-radius: 50%;
+}
