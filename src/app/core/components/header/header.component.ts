@@ -13,10 +13,17 @@ export class HeaderComponent {
   localStrService = inject(LocalStorageService);
   
   // Get user data from localStorage
-  user = this.localStrService.getItem(environment.AUTH_TOKEN_KEY) as User;
-  username = this.user?.name || 'Guest';
-  userImg = this.user?.photoUrl || '/assets/images/default-avatar.png';
+  username : string = ''
+  userImg : string = ''
   
+
+  ngOnInit(){
+     this.username = (this.localStrService.getItem(environment.AUTH_TOKEN_KEY) as User)?.name || 'Guest';
+     this.userImg = (this.localStrService.getItem(environment.AUTH_TOKEN_KEY) as User)?. photoUrl
+  }
+
+
+
   navList = ["Home", "TV Shows", "New & Popular", "My List", "Browse by Language"];
   
   signOut() {
