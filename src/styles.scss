@@ -1,4 +1,9 @@
 @use "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'swiper/swiper.scss';
 
 /* Custom animations for login page */
 @keyframes pulse-slow {

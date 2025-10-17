@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from '../../core/components/header/header.component';
 import { BannerComponent } from '../../core/components/banner/banner.component';
+import { MovieCarouselComponent } from '../../shared/components/movie-carousel/movie-carousel.component';
 
 @Component({
   selector: 'app-browse',
   standalone: true,
-  imports: [HeaderComponent, BannerComponent],
+  imports: [HeaderComponent, BannerComponent , MovieCarouselComponent],
   templateUrl: './browse.component.html',
   styleUrl: './browse.component.scss'
 })
