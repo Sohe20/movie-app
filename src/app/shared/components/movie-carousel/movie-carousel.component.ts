@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import Swiper from 'swiper'
 @Component({
   selector: 'app-movie-carousel',
@@ -6,8 +6,14 @@ import Swiper from 'swiper'
   templateUrl: './movie-carousel.component.html',
   styleUrl: './movie-carousel.component.scss'
 })
-export class MovieCarouselComponent {
+export class MovieCarouselComponent implements AfterViewInit{
 @ViewChild('swiperContainer') swiperContainer !: ElementRef;
+
+
+ ngAfterViewInit(){
+  this.initSwaper();
+ }
+
 
  initSwaper(){
    return new Swiper(this.swiperContainer.nativeElement , {

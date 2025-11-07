@@ -1,81 +1,45 @@
+
 @use "tailwindcss";
+@use 'swiper/css';
+@use 'swiper/css/navigation';
+@use 'swiper/css/pagination';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import 'swiper/swiper.scss';
-
-/* Custom animations for login page */
-@keyframes pulse-slow {
-  0%, 100% { opacity: 0.9; }
-  50% { opacity: 0.7; }
-}
-
-@keyframes slow-zoom {
-  0% { transform: scale(1.05); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1.05); }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0) rotate(3deg); }
-  50% { transform: translateY(-10px) rotate(5deg); }
-}
-
-@keyframes float-delayed {
-  0%, 100% { transform: translateY(0) rotate(-2deg); }
-  50% { transform: translateY(-15px) rotate(-4deg); }
-}
-
-@keyframes float-more-delayed {
-  0%, 100% { transform: translateY(0) rotate(6deg); }
-  50% { transform: translateY(-8px) rotate(8deg); }
-}
-
-/* Add the animations to Tailwind */
+// Line clamp utilities
 @layer utilities {
-  .animate-pulse-slow {
-    animation: pulse-slow 4s ease-in-out infinite;
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
   
-  .animate-slow-zoom {
-    animation: slow-zoom 20s ease-in-out infinite;
-  }
-  
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
-  
-  .animate-float-delayed {
-    animation: float-delayed 8s ease-in-out infinite;
-  }
-  
-  .animate-float-more-delayed {
-    animation: float-more-delayed 7s ease-in-out infinite;
+  .line-clamp-4 {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 }
 
-/* Global styles */
+// Global styles
 html, body {
   height: 100%;
   margin: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Improve scrollbar appearance */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #141414;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #E50914;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #ff0a17;
+// Netflix-specific animations
+@layer utilities {
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
+  }
+  
+  .netflix-focus {
+    @apply focus:outline-none focus:ring-2 focus:ring-red-600;
+  }
 }
