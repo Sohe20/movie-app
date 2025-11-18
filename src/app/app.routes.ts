@@ -6,5 +6,8 @@ export const routes: Routes = [
     },
     {
         path:'browse',loadComponent :() => import('./pages/browse/browse.component')
-    }
+    },
+    {
+        path: "movie/:id", loadComponent: () => import('./pages/movie-detail/movie-detail.component')
+    },
 ];

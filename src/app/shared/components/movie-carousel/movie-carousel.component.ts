@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import Swiper from 'swiper';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
@@ -8,6 +8,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Movie } from '../../../core/models/movie.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie-carousel',
@@ -21,7 +22,7 @@ export class MovieCarouselComponent implements AfterViewInit {
   @Input() movies : Movie[] = []
   private swiper: Swiper | null = null;
   
- 
+  router = inject(Router)
    
 
   ngAfterViewInit() {
@@ -76,6 +77,12 @@ export class MovieCarouselComponent implements AfterViewInit {
         watchOverflow: true,
      
       });
+    }
+  }
+
+  navigateToMovieDetail(id:number){
+    if(id){
+      this.router.navigate(['/movie', id]);
     }
   }
 }

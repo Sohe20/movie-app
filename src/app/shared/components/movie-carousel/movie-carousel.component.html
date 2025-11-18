@@ -7,7 +7,7 @@
     <div #swiperContainer class="swiper-container">
       <div class="swiper-wrapper">
         <!-- Movie Items -->
-        <div class="swiper-slide" *ngFor="let movie of movies">
+        <div class="swiper-slide" *ngFor="let movie of movies" (click)="navigateToMovieDetail(movie.id)">
           <div class="movie-card relative rounded-lg overflow-hidden group cursor-pointer">
             <!-- Movie Poster -->
             <img [src]="'https://image.tmdb.org/t/p/w500'+movie.poster_path"
